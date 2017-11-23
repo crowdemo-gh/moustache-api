@@ -1,0 +1,44 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: moustache-api
+  labels:
+    commit: ${WERCKER_GIT_COMMIT}
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: moustache-api
+  template:
+    metadata:
+      labels:
+        app: moustache-api
+        commit: ${WERCKER_GIT_COMMIT}
+    spec:
+      containers:
+      - name: moustache-api
+        image: ${DOCKER_REPO}:${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}
+        imagePullPolicy: Always
+        ports:
+        - name: moustache-api
+          containerPort: 5001
+          protocol: TCP
+      imagePullSecrets:
+        - name: wercker    
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: moustache-api
+  labels:
+    app: moustache-api
+    commit: ${WERCKER_GIT_COMMIT}
+spec:
+  ports:
+  - port: 30001
+    targetPort: 5001
+  selector:
+    app: moustache-api
+    commit: ${WERCKER_GIT_COMMIT}
+  type: LoadBalancer
+---
