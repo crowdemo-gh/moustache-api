@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: moustache-api
-        image: ${DOCKER_REPO}:${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}
+        image: wcr.io/dansmithy/moustache-api:${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}
         imagePullPolicy: Always
         ports:
         - name: moustache-api
