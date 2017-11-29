@@ -25,20 +25,3 @@ spec:
           protocol: TCP
       imagePullSecrets:
         - name: wercker
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: moustache-api
-  labels:
-    app: moustache-api
-    commit: ${WERCKER_GIT_COMMIT}
-spec:
-  ports:
-  - port: 30001
-    targetPort: 5001
-    protocol: TCP
-  selector:
-    app: moustache-api
-    commit: ${WERCKER_GIT_COMMIT}
----
