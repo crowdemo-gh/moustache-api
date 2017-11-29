@@ -24,7 +24,7 @@ spec:
           containerPort: 5001
           protocol: TCP
       imagePullSecrets:
-        - name: wercker    
+        - name: wercker
 ---
 apiVersion: v1
 kind: Service
@@ -40,5 +40,4 @@ spec:
   selector:
     app: moustache-api
     commit: ${WERCKER_GIT_COMMIT}
-  type: LoadBalancer
 ---
